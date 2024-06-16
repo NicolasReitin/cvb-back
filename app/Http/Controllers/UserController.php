@@ -25,12 +25,14 @@ class UserController extends Controller
      */
     public function store()
     {
+        //validation des données récupérées 
         $validateData = request()->validate([
             'name' => 'required|string',
             'email' => 'required|email',
             'password' => 'required|string'
         ]);
 
+        // on vérifie qu'il n'y ait pas de caractères spéciaux
         $name = htmlspecialchars($validateData['name']);
         $email = htmlspecialchars($validateData['email']);
         $password = $validateData['password'];
@@ -38,6 +40,7 @@ class UserController extends Controller
         DB::beginTransaction();
         
         try {
+            //on créé le user avec selon le modèle User et on save dans la Base de données
             $user = User::create([
                 'name' => $name, 
                 'email' => $email, 
@@ -47,6 +50,7 @@ class UserController extends Controller
             //confirmation de la transaction
             DB::commit();
 
+            // on renvoi la réponse en JSON au front
             return response()->json(['success' => 'User created successfully', 'user' => $user], 201);
             
         } catch(Exception $ex){ // si le try ne fonctionne pas
@@ -131,7 +135,7 @@ class UserController extends Controller
 
         $request->session()->regenerate();
 
-        // renvoi d'un reponse en Jonn pour le front suite à la connexion du user
+        // renvoi d'un reponse en JSON pour le front suite à la connexion du user
         return response()->json([
             'loginSuccessful' => true,
             'user' => [
