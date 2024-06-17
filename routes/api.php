@@ -19,14 +19,15 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return UserResource::make($user);
 });
 
+
 Route::get('/users', function() {
     $user = User::paginate(5);
     return UserResource::collection($user);
 });
 
-Route::post('/cvb-login', [UserController::class, 'login']);
+// Route::post('/cvb-login', [UserController::class, 'login']);
 
-Route::post('/cvb-logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
+// Route::post('/cvb-logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
 
 //---------------------------- Dashboard Admin --------------------------------
 Route::get('/cvb-admin', [ActualiteController::class, 'index']);
@@ -34,7 +35,7 @@ Route::get('/cvb-admin', [ActualiteController::class, 'index']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(isAdmin::class);
 
 //---------------------------- User --------------------------------
-Route::middleware(isAdmin::class)->group(function () { // utilisation du middleware sans alias
+Route::middleware(isAdmin::class)->group(function () { // utilisation du middleware sans aliasp
     Route::post('/user/create', [UserController::class, 'store']);
     Route::post('/user/update/{user}', [UserController::class, 'update']);
     Route::delete('/user/{user}', [UserController::class, 'destroy']);
@@ -49,6 +50,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/actualite/create', [ActualiteController::class, 'store']);
     Route::delete('/actualite/{actu}', [ActualiteController::class, 'destroy']);
 });
+
 //---------------------------- Actualites --------------------------------
 Route::get('/actualites', [ActualiteController::class, 'index']);
 Route::get('/actualite/{actu}', [ActualiteController::class, 'show']);
@@ -60,3 +62,5 @@ Route::get('/equipe-senior/{equipe_id}', [EquipeSeniorController::class, 'index'
 
 // ----------------------------- Partenaires ----------------------------------------
 Route::get('/partenaires', [PartenaireController::class, 'index']);
+
+// ----------------------------- Divers ----------------------------------------
