@@ -19,8 +19,8 @@ class ActualiteController extends Controller
         $othersActu = $latestActus->skip(1);
         // dd($actualites);
         return response()->json([
+            'firstActu' => $firstActu ? ActualitesResource::make($firstActu) : null,
             'actualites' => ActualitesResource::collection($actualites),
-            'firstActu' => ActualitesResource::make($firstActu),
             'othersActu' => ActualitesResource::collection($othersActu)
         ]);
     }

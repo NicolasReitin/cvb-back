@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\partenaire;
 use App\Http\Requests\StorepartenaireRequest;
 use App\Http\Requests\UpdatepartenaireRequest;
 use App\Http\Resources\PartenairesResource;
+use App\Models\Partenaire;
 
 class PartenaireController extends Controller
 {
