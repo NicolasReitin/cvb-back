@@ -94,7 +94,6 @@ class UserController extends Controller
             $errorMessage = $ex->getMessage(); // Récupération du message d'erreur
             return response()->json(['error' => $errorMessage], 500); // Par exemple, renvoyer une réponse JSON avec le message d'erreur et le code HTTP 500
         }
-
         
     }
 
@@ -113,48 +112,5 @@ class UserController extends Controller
             $errorMessage = $ex->getMessage(); // Récupération du message d'erreur
             return response()->json(['error' => $errorMessage], 500); // Par exemple, renvoyer une réponse JSON avec le message d'erreur et le code HTTP 500
         }
-    }
-
-    public function login(Request $request)
-    {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-
-        //$request->only estrait les champs de la requet et créé un tableau associatif avec ces valeurs garantissant qu'elles soient passées à Auth::attempt
-        //Auth::attempt tente de connecter l'utilisateur avec les info fournis. Il prend le tableau associatif et essaie de trouver un utilisateur correspondant dans la BDD
-        if (!Auth::attempt($request->only('email', 'password'))) {
-            //si echec, une exception est généree avec un message spécific
-            throw ValidationException::withMessages([
-                'email' => ["L'email ou le mot de passe est incorect"],
-            ]);
-        }
-
-        $user = Auth::user();
-
-        $request->session()->regenerate();
-
-        // renvoi d'un reponse en JSON pour le front suite à la connexion du user
-        return response()->json([
-            'loginSuccessful' => true,
-            'user' => [
-                'name' => $user->name,
-                'email' => $user->email,
-                'role' => $user->role,
-            ],
-            'redirect_url' => '/dashboard'
-        ]);    
-    }
-
-    public function logout(Request $request)
-    {
-        Auth::guard('web')->logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
-        return response()->json(['message' => 'Logout successful']);
     }
 }

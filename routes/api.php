@@ -25,13 +25,8 @@ Route::get('/users', function() {
     return UserResource::collection($user);
 });
 
-// Route::post('/cvb-login', [UserController::class, 'login']);
-
-// Route::post('/cvb-logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
 
 //---------------------------- Dashboard Admin --------------------------------
-Route::get('/cvb-admin', [ActualiteController::class, 'index']);
-
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(isAdmin::class);
 
 //---------------------------- User --------------------------------
