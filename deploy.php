@@ -21,6 +21,7 @@ host('109.234.165.116')
 // Hooks
 
 desc('Prepares a new release');
+
 task('deploy:prepare', [
     'deploy:info',
     'deploy:setup',
@@ -28,6 +29,7 @@ task('deploy:prepare', [
     'deploy:release',
     'deploy:update_code',
     'deploy:shared',
+    // retiré car droit o2switch ne l'autorise pas
     //'deploy:writable',
 ]);
 
