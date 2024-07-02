@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Staff;
-use App\Models\equipeJeune;
-use App\Http\Resources\CoachsResource;
+use App\Models\EquipeJeune;
 use App\Http\Resources\EquipesResource;
 use App\Http\Requests\Storeequipe_jeuneRequest;
 use App\Http\Requests\Updateequipe_jeuneRequest;
@@ -16,7 +14,7 @@ class EquipeJeuneController extends Controller
      */
     public function index($equipe_id)
     {
-        $equipe = equipeJeune::query()
+        $equipe = EquipeJeune::query()
         ->where('id', $equipe_id)
         ->with(['joueurs' => function ($query) {
             $query->orderBy('nom', 'asc'); // Tri par ordre alphabétique du nom
