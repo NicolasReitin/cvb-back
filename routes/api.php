@@ -55,8 +55,8 @@ Route::middleware('auth')->group(function () {
 
 
 // ----------------------------- Equipes ----------------------------------------
-Route::get('/equipe-senior/{equipe_id}', [EquipeSeniorController::class, 'index'])->name('equipe.index');
-Route::get('/equipe-junior/{equipe_id}', [EquipeJeuneController::class, 'index'])->name('equipe.index');
+Route::get('/equipe-senior/{equipe_id}', [EquipeSeniorController::class, 'index']);
+Route::get('/equipe-junior/{equipe_id}', [EquipeJeuneController::class, 'index']);
 
 
 // ----------------------------- Partenaires ----------------------------------------
