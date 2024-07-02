@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Staff;
 use App\Models\equipeJeune;
+use App\Http\Resources\CoachsResource;
+use App\Http\Resources\EquipesResource;
 use App\Http\Requests\Storeequipe_jeuneRequest;
 use App\Http\Requests\Updateequipe_jeuneRequest;
 
@@ -11,9 +14,18 @@ class EquipeJeuneController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($equipe_id)
     {
-        //
+        $equipe = equipeJeune::query()
+        ->where('id', $equipe_id)
+        ->with(['joueurs' => function ($query) {
+            $query->orderBy('nom', 'asc'); // Tri par ordre alphabétique du nom
+        }])
+        ->first();
+
+        return response()->json([
+            'equipe' => EquipesResource::make($equipe),
+        ]);
     }
 
     /**

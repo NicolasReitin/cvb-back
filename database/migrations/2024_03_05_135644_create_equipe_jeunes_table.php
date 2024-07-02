@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('equipe_jeunes', function (Blueprint $table) {
             $table->id();
             $table->string('nom', 50);
-            $table->string('division', 50);
+            $table->string('division', 50)->nullable();
             $table->string('photo', 255)->nullable();
             $table->timestamps();
         });

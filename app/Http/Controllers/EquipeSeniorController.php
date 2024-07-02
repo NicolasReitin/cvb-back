@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
 use App\Models\Staff;
 use App\Models\EquipeSenior;
 use App\Http\Requests\Storeequipe_seniorRequest;
