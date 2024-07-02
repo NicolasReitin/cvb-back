@@ -20,8 +20,8 @@ class ActualiteController extends Controller
         // dd($actualites);
         return response()->json([
             'firstActu' => $firstActu ? ActualitesResource::make($firstActu) : null,
-            'actualites' => ActualitesResource::collection($actualites),
-            'othersActu' => ActualitesResource::collection($othersActu)
+            'actualites' => $actualites ? ActualitesResource::collection($actualites) : null,
+            'othersActu' => $othersActu ? ActualitesResource::collection($othersActu) : null
         ]);
     }
 
@@ -29,9 +29,9 @@ class ActualiteController extends Controller
     {
         $data = request()->all();
         if (!empty($data['title']) && !empty($data['author'])) {
-            $author = strip_tags($data['author']);
-            $title = htmlspecialchars($data['title']);
-            $content = htmlspecialchars($data['content']);
+            $author = $data['author'];
+            $title = $data['title'];
+            $content = $data['content'];
 
             $actualite = new Actualite();
             $actualite->titre = $title;

@@ -33,8 +33,8 @@ class UserController extends Controller
         ]);
 
         // on vérifie qu'il n'y ait pas de caractères spéciaux
-        $name = htmlspecialchars($validateData['name']);
-        $email = htmlspecialchars($validateData['email']);
+        $name = $validateData['name'];
+        $email = $validateData['email'];
         $password = $validateData['password'];
 
         DB::beginTransaction();
@@ -75,8 +75,8 @@ class UserController extends Controller
 
         // $data = request()->all();
         
-        $userName = htmlspecialchars($validateData['name']);
-        $userEmail = htmlspecialchars($validateData['email']);
+        $userName = $validateData['name'];
+        $userEmail = $validateData['email'];
         
         // dd($userId);
         DB::beginTransaction();

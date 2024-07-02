@@ -20,10 +20,10 @@ class PartenaireController extends Controller
         $partnersPrivate = Partenaire::query()->where('role', 'Partenaires privés')->get();
         
         return response()->json([
-            'partners' => PartenairesResource::collection($partners),
-            'partnersInstitutionnels' => PartenairesResource::collection($partnersInstitutionnels),
-            'partnersHelp' => PartenairesResource::collection($partnersHelp),
-            'partnersPrivate' => PartenairesResource::collection($partnersPrivate)
+            'partners' => $partners ? PartenairesResource::collection($partners) : null,
+            'partnersInstitutionnels' => $partnersInstitutionnels ? PartenairesResource::collection($partnersInstitutionnels) : null,
+            'partnersHelp' => $partnersHelp ? PartenairesResource::collection($partnersHelp) : null,
+            'partnersPrivate' => $partnersPrivate ? PartenairesResource::collection($partnersPrivate) : null
         ]);
     }
 
